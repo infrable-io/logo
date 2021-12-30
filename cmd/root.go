@@ -10,9 +10,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var invert bool
 var size int
 
 func init() {
+	rootCmd.Flags().BoolVarP(&invert, "invert", "i", false, "whether to invert the colorscheme")
 	rootCmd.Flags().IntVarP(&size, "size", "s", 500, "size of the generated logo")
 }
 
@@ -32,15 +34,35 @@ var rootCmd = &cobra.Command{
 	format.
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		//           bg
+		//      -------------
+		//      \___     ___/
+		//      fg -|-> |
+		//           \  |
+		//            + |
+		//             \|<- stroke
+		//  stoke ->|\
+		//          | +
+		//          |  \
+		//          | <-|- fg
+		//       ---     ---
+		//      /____________\
+		//
+
 		// set colorscheme
-		base03 := "#002b36"
-		base02 := "#073642"
-		base01 := "#586e75"
-		red := "#dc322f"
+		bg := "#ffffff"
+		fg := "#000000"
+		stroke := "#ffffff"
+
+		if invert == true {
+			bg = "#000000"
+			fg = "#ffffff"
+			stroke = "#000000"
+		}
 
 		// set attributes
-		strokeWidth := float64(size) / 70.0
-		radius := float64(size) / 70.0 // radius of circles
+		strokeWidth := float64(size) / 30.0
 
 		s := svg.SVG{
 			XMLName:      "svg",
@@ -57,7 +79,7 @@ var rootCmd = &cobra.Command{
 			Y:       0,
 			Width:   float64(size),
 			Height:  float64(size),
-			Fill:    base03,
+			Fill:    bg,
 		})
 
 		//             |--- size --|
@@ -108,15 +130,15 @@ var rootCmd = &cobra.Command{
 
 		p1 := svg.Polygon{
 			XMLName:     "polygon",
-			Fill:        base03,
-			Stroke:      red,
+			Fill:        fg,
+			Stroke:      stroke,
 			StrokeWidth: strokeWidth,
 		}
 
 		p2 := svg.Polygon{
 			XMLName:     "polygon",
-			Fill:        base02,
-			Stroke:      base01,
+			Fill:        fg,
+			Stroke:      stroke,
 			StrokeWidth: strokeWidth,
 		}
 
@@ -130,44 +152,6 @@ var rootCmd = &cobra.Command{
 
 		s.AppendElement(p2)
 		s.AppendElement(p1)
-
-		cpts1 := [6]svg.Point{
-			C1(ppts1[0], float64(size)/15.0, false),
-			C2(ppts1[1], float64(size)/15.0, false),
-			C3(ppts1[2], float64(size)/22.5, false),
-			C5(ppts1[4], float64(size)/7.5, false),
-			C6(ppts1[5], float64(size)/20.0, false),
-			C8(ppts1[7], float64(size)/22.5, false),
-		}
-
-		cpts2 := [6]svg.Point{
-			C1(ppts2[0], float64(size)/15.0, true),
-			C2(ppts2[1], float64(size)/15.0, true),
-			C3(ppts2[2], float64(size)/22.5, true),
-			C5(ppts2[4], float64(size)/7.5, true),
-			C6(ppts2[5], float64(size)/20.0, true),
-			C8(ppts2[7], float64(size)/22.5, true),
-		}
-
-		for _, pt := range cpts1 {
-			s.AppendElement(svg.Circle{
-				XMLName: "cirle",
-				Cx:      pt.X,
-				Cy:      pt.Y,
-				R:       radius,
-				Fill:    red,
-			})
-		}
-
-		for _, pt := range cpts2 {
-			s.AppendElement(svg.Circle{
-				XMLName: "cirle",
-				Cx:      pt.X,
-				Cy:      pt.Y,
-				R:       radius,
-				Fill:    base01,
-			})
-		}
 
 		out, err := svg.Marshal(s)
 		if err != nil {
@@ -251,77 +235,4 @@ func P8(a, b, c, center float64, mirror bool) svg.Point {
 		c = -c
 	}
 	return svg.Point{X: center - a + 0.5*c, Y: center - b + c}
-}
-
-func C1(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	x := c.X + rad*math.Cos(math.Atan(2.0)/2.0)
-	y := c.Y + rad*math.Sin(math.Atan(2.0)/2.0)
-	return svg.Point{X: x, Y: y}
-}
-
-func C2(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	x := c.X - rad*math.Cos(math.Atan(2.0)/2.0)
-	y := c.Y + rad*math.Sin(math.Atan(2.0)/2.0)
-	return svg.Point{X: x, Y: y}
-}
-
-func C3(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	x := c.X - rad*math.Cos((math.Atan(1.0/2.0)+math.Pi/2.0)/2.0)
-	y := c.Y - rad*math.Sin((math.Atan(1.0/2.0)+math.Pi/2.0)/2.0)
-	return svg.Point{X: x, Y: y}
-}
-
-func C4(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	x := c.X - rad*math.Cos(math.Atan(1.0))
-	y := c.Y - rad*math.Sin(math.Atan(1.0))
-	return svg.Point{X: x, Y: y}
-}
-
-func C5(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	x := c.X - rad*math.Sin(math.Atan(1.0/2.0)/2.0)
-	y := c.Y - rad*math.Cos(math.Atan(1.0/2.0)/2.0)
-	return svg.Point{X: x, Y: y}
-}
-
-func C6(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	// Note: This is a hack to make C5 and C6 vertically aligned.
-	x := c.X + rad*(20.0/7.5)*math.Sin(math.Atan(1.0/2.0)/2.0)
-	y := c.Y - rad*math.Cos((math.Atan(2.0)+math.Pi/2.0)/2.0)
-	return svg.Point{X: x, Y: y}
-}
-
-func C7(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	x := c.X + rad*math.Cos(math.Atan(1.0))
-	y := c.Y - rad*math.Sin(math.Atan(1.0))
-	return svg.Point{X: x, Y: y}
-}
-
-func C8(c svg.Point, rad float64, mirror bool) svg.Point {
-	if mirror {
-		rad = -rad
-	}
-	x := c.X + rad*math.Cos((math.Atan(1.0/2.0)+math.Pi/2.0)/2.0)
-	y := c.Y - rad*math.Sin((math.Atan(1.0/2.0)+math.Pi/2.0)/2.0)
-	return svg.Point{X: x, Y: y}
 }
