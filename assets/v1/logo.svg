@@ -1,0 +1,17 @@
+ <svg xmlns="http://www.w3.org/2000/svg" version="2.0" width="500" height="500" fill="" stroke="" stroke-width="0">
+  <rect x="0" y="0" width="500" height="500" rx="0" ry="0" fill="#002b36" stroke="" stroke-width="0"></rect>
+  <polygon points="405,443, 95,443, 134,366, 211,366, 211,173, 289,327, 289,366, 366,366" fill="#073642" stroke="#586e75" stroke-width="7.142857142857143"></polygon>
+  <polygon points="95,57, 405,57, 366,134, 289,134, 289,327, 211,173, 211,134, 134,134" fill="#002b36" stroke="#dc322f" stroke-width="7.142857142857143"></polygon>
+  <circle cx="123.84652975759431" cy="74.38874891962902" r="7.142857142857143" fill="#dc322f" stroke="" stroke-width="0"></circle>
+  <circle cx="376.1534702424057" cy="74.38874891962902" r="7.142857142857143" fill="#dc322f" stroke="" stroke-width="0"></circle>
+  <circle cx="354.19845928795786" cy="115.21527581268273" r="7.142857142857143" fill="#dc322f" stroke="" stroke-width="0"></circle>
+  <circle cx="273.3102629270444" cy="262.37098262922154" r="7.142857142857143" fill="#dc322f" stroke="" stroke-width="0"></circle>
+  <circle cx="226.68973707295564" cy="167.00192839257915" r="7.142857142857143" fill="#dc322f" stroke="" stroke-width="0"></circle>
+  <circle cx="145.8015407120421" cy="115.21527581268273" r="7.142857142857143" fill="#dc322f" stroke="" stroke-width="0"></circle>
+  <circle cx="376.1534702424057" cy="425.61125108037095" r="7.142857142857143" fill="#586e75" stroke="" stroke-width="0"></circle>
+  <circle cx="123.84652975759431" cy="425.61125108037095" r="7.142857142857143" fill="#586e75" stroke="" stroke-width="0"></circle>
+  <circle cx="145.8015407120421" cy="384.78472418731724" r="7.142857142857143" fill="#586e75" stroke="" stroke-width="0"></circle>
+  <circle cx="226.68973707295564" cy="237.6290173707785" r="7.142857142857143" fill="#586e75" stroke="" stroke-width="0"></circle>
+  <circle cx="273.3102629270444" cy="332.9980716074209" r="7.142857142857143" fill="#586e75" stroke="" stroke-width="0"></circle>
+  <circle cx="354.19845928795786" cy="384.78472418731724" r="7.142857142857143" fill="#586e75" stroke="" stroke-width="0"></circle>
+ </svg>
