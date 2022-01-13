@@ -27,9 +27,9 @@ func Execute() {
 
 var rootCmd = &cobra.Command{
 	Use:   "logo",
-	Short: "Generates the Infrable.io logo.",
+	Short: "Generates the Infrable logo.",
 	Long: `
-	Logo is a simple CLI that programmatically generates the Infrable.io logo.
+	Logo is a simple CLI that programmatically generates the Infrable logo.
 	The output is an SVG file, which can be converted to any other image file
 	format.
 	`,
