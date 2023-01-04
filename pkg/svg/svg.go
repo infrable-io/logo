@@ -1,13 +1,15 @@
-/*
-/ https://www.w3.org/TR/SVG/
-*/
-
+// Copyright 2023 Infrable. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
 package svg
 
 import (
 	"encoding/xml"
 	"fmt"
 )
+
+// For documentation on Scalable Vector Graphics (SVG), see the following:
+//   - https://www.w3.org/TR/SVG
 
 // An SVG document fragment consists of any number of SVG elements contained
 // within an 'svg' element.
