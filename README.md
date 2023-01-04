@@ -10,3 +10,10 @@
 A simple CLI that programmatically generates the [Infrable](https://infrable.io) logo.
 
 The output is an SVG file, which can be converted to any other image file format.
+
+**Example**
+
+```bash
+# Using ImageMagick (https://imagemagick.org)
+convert logo.svg logo.png
+```
