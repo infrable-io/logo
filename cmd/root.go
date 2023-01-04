@@ -1,3 +1,6 @@
+// Copyright 2023 Infrable. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
 package cmd
 
 import (
@@ -6,7 +9,7 @@ import (
 	"math"
 	"os"
 
-	"github.com/infrable-io/logo/svg"
+	svg "github.com/infrable-io/logo/pkg/svg"
 	"github.com/spf13/cobra"
 )
 
